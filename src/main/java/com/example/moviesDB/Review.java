@@ -17,6 +17,4 @@ public class Review {
     private ObjectId id;
     private String body;
 
-
-
 }
