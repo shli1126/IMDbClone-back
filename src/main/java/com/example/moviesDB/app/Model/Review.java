@@ -1,4 +1,4 @@
-package com.example.moviesDB;
+package com.example.moviesDB.app.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "reviews")
+@Document(collation = "review")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +17,7 @@ public class Review {
     private ObjectId id;
     private String body;
 
+    public Review(String body) {
+        this.body = body;
+    }
 }

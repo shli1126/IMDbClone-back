@@ -1,20 +1,18 @@
-package com.example.moviesDB;
+package com.example.moviesDB.app.Controller;
 
-import org.apache.coyote.Response;
-import org.bson.types.ObjectId;
+import com.example.moviesDB.app.Model.Movie;
+import com.example.moviesDB.app.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/movies")
+@CrossOrigin("http://localhost:3000")
 public class MovieController {
 
     @Autowired
@@ -26,6 +24,13 @@ public class MovieController {
 
     @GetMapping("/{imdbId}")
     public ResponseEntity<Optional<Movie>> getSingleMovie(@PathVariable String imdbId) {
-        return new ResponseEntity<Optional<Movie>>(movieService.singleMovie(imdbId), HttpStatus.OK);
+        return new ResponseEntity<Optional<Movie>>(movieService.getSingleMovie(imdbId), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{ObjectId}")
+    public void deleteSingleMovie(@PathVariable String ObjectId) {
+        movieService.deleteSingleMovie(ObjectId);
+    }
+
+
 }
