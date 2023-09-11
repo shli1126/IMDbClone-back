@@ -1,9 +1,12 @@
-package com.example.moviesDB.Dto;
-
+package com.example.moviesDB.auth.Model;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class UserDTO {
+
+@Document(collection = "users")
+public class User {
+
     @Id
     private ObjectId id;
     private int userID;
@@ -11,7 +14,7 @@ public class UserDTO {
     private String email;
     private String password;
 
-    public UserDTO(ObjectId id, int userID, String username, String email, String password) {
+    public User(ObjectId id, int userID, String username, String email, String password) {
         this.id = id;
         this.userID = userID;
         this.username = username;
@@ -19,7 +22,7 @@ public class UserDTO {
         this.password = password;
     }
 
-    public UserDTO() {
+    public User() {
     }
 
     public ObjectId getId() {
@@ -64,7 +67,7 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" +
+        return "User{" +
                 "id=" + id +
                 ", userID=" + userID +
                 ", username='" + username + '\'' +
@@ -73,3 +76,4 @@ public class UserDTO {
                 '}';
     }
 }
+

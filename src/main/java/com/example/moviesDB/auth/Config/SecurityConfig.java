@@ -1,4 +1,4 @@
-package com.example.moviesDB.Config;
+package com.example.moviesDB.auth.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
