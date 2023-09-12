@@ -1,8 +1,8 @@
 package com.example.moviesDB.auth.Controller;
 
 
-import com.example.moviesDB.auth.Dto.LoginDTO;
-import com.example.moviesDB.auth.Dto.UserDTO;
+import com.example.moviesDB.auth.DTO.LoginDTO;
+import com.example.moviesDB.auth.DTO.UserDTO;
 import com.example.moviesDB.auth.Response.LoginResponse;
 import com.example.moviesDB.auth.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

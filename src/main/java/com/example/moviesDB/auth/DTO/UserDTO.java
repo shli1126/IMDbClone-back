@@ -1,4 +1,4 @@
-package com.example.moviesDB.auth.Dto;
+package com.example.moviesDB.auth.DTO;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;

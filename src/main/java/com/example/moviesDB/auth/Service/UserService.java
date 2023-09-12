@@ -1,6 +1,6 @@
 package com.example.moviesDB.auth.Service;
-import com.example.moviesDB.auth.Dto.LoginDTO;
-import com.example.moviesDB.auth.Dto.UserDTO;
+import com.example.moviesDB.auth.DTO.LoginDTO;
+import com.example.moviesDB.auth.DTO.UserDTO;
 import com.example.moviesDB.auth.Model.User;
 import com.example.moviesDB.auth.Repository.UserRepository;
 import com.example.moviesDB.auth.Response.LoginResponse;

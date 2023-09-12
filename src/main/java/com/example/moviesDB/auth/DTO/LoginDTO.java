@@ -1,4 +1,4 @@
-package com.example.moviesDB.auth.Dto;
+package com.example.moviesDB.auth.DTO;
 
 public class LoginDTO {
     private String email;
