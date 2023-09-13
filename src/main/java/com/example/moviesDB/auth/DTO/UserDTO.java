@@ -2,6 +2,9 @@ package com.example.moviesDB.auth.DTO;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
+
+import java.util.List;
 
 public class UserDTO {
     @Id
@@ -10,13 +13,23 @@ public class UserDTO {
     private String username;
     private String email;
     private String password;
+    private List<String> watchList;
 
-    public UserDTO(ObjectId id, int userID, String username, String email, String password) {
+    public UserDTO(ObjectId id, int userID, String username, String email, String password, List<String> watchList) {
         this.id = id;
         this.userID = userID;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.watchList = watchList;
+    }
+
+    public List<String> getWatchList() {
+        return watchList;
+    }
+
+    public void setWatchList(List<String> watchList) {
+        this.watchList = watchList;
     }
 
     public UserDTO() {
@@ -70,6 +83,7 @@ public class UserDTO {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", watchList=" + watchList +
                 '}';
     }
 }

@@ -1,10 +1,15 @@
 package com.example.moviesDB.auth.Service;
+import com.example.moviesDB.app.Model.Movie;
+import com.example.moviesDB.app.Repository.MovieRepository;
 import com.example.moviesDB.auth.DTO.LoginDTO;
 import com.example.moviesDB.auth.DTO.UserDTO;
 import com.example.moviesDB.auth.Model.User;
 import com.example.moviesDB.auth.Repository.UserRepository;
 import com.example.moviesDB.auth.Response.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +22,11 @@ public class UserService {
     private UserRepository userRepo;
 
     @Autowired
+    private MovieRepository movieRepo;
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public String addUser(UserDTO userDTO) {
@@ -26,7 +36,8 @@ public class UserService {
                 userDTO.getUserID(),
                 userDTO.getUsername(),
                 userDTO.getEmail(),
-                this.passwordEncoder.encode(userDTO.getPassword())
+                this.passwordEncoder.encode(userDTO.getPassword()),
+                userDTO.getWatchList()
         ));
 
         return user.getUsername();
@@ -55,6 +66,22 @@ public class UserService {
         else {
             return new LoginResponse("Email not found", false);
         }
+    }
+
+    public Optional<Movie> addUserWatchList(String username, String imdbId) {
+
+        Optional<Movie> movie = movieRepo.findMovieByImdbId(imdbId);
+        if (movie != null) {
+            mongoTemplate.update(User.class)
+                    .matching(Criteria.where("username").is(username))
+                    .apply(new Update().push("watchList").value(imdbId))
+                    .first();
+            return movie;
+        }
+        else {
+            return null;
+        }
+
     }
 }
 
