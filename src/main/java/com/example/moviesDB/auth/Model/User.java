@@ -21,10 +21,11 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private List<String> watchList;
+    @DocumentReference
+    private List<Movie> watchList;
 
 
-    public User(ObjectId id, int userID, String username, String email, String password, List<String> watchList) {
+    public User(ObjectId id, int userID, String username, String email, String password, List<Movie> watchList) {
         this.id = id;
         this.userID = userID;
         this.username = username;
@@ -33,11 +34,11 @@ public class User {
         this.watchList = watchList;
     }
 
-    public List<String> getWatchList() {
+    public List<Movie> getWatchList() {
         return watchList;
     }
 
-    public void setWatchList(List<String> watchList) {
+    public void setWatchList(List<Movie> watchList) {
         this.watchList = watchList;
     }
 

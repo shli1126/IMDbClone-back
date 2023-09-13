@@ -6,6 +6,7 @@ import com.example.moviesDB.auth.DTO.UserDTO;
 import com.example.moviesDB.auth.Model.User;
 import com.example.moviesDB.auth.Repository.UserRepository;
 import com.example.moviesDB.auth.Response.LoginResponse;
+import com.example.moviesDB.auth.Response.WatchListResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -68,18 +69,19 @@ public class UserService {
         }
     }
 
-    public Optional<Movie> addUserWatchList(String username, String imdbId) {
+    public WatchListResponse addUserWatchList(String username, String imdbId) {
 
-        Optional<Movie> movie = movieRepo.findMovieByImdbId(imdbId);
+        Movie movie = movieRepo.findMovieByImdbId(imdbId).orElse(null);
+        System.out.println(movie);
         if (movie != null) {
             mongoTemplate.update(User.class)
                     .matching(Criteria.where("username").is(username))
-                    .apply(new Update().push("watchList").value(imdbId))
+                    .apply(new Update().push("watchList").value(movie))
                     .first();
-            return movie;
+            return new WatchListResponse("Added movie to watch list", true);
         }
         else {
-            return null;
+            return new WatchListResponse("Movie not found", false);
         }
 
     }

@@ -5,6 +5,7 @@ import com.example.moviesDB.app.Model.Review;
 import com.example.moviesDB.auth.DTO.LoginDTO;
 import com.example.moviesDB.auth.DTO.UserDTO;
 import com.example.moviesDB.auth.Response.LoginResponse;
+import com.example.moviesDB.auth.Response.WatchListResponse;
 import com.example.moviesDB.auth.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,8 +35,12 @@ public class UserController {
 
     @PostMapping(path="/watchlist")
     public ResponseEntity<?> addUserWatchList(@RequestBody Map<String, String> payload) {
-        return new ResponseEntity(userService.addUserWatchList(payload.get("username"), payload.get("imdbId")), HttpStatus.CREATED);
 
+        WatchListResponse watchListResponse = userService.addUserWatchList(
+                payload.get("username"),
+                payload.get("imdbId")
+        );
+        return ResponseEntity.ok(watchListResponse);
     }
 
 
