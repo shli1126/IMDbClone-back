@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -69,8 +70,12 @@ public class UserService {
         }
     }
 
-    public WatchListResponse addUserWatchList(String username, String imdbId) {
+    public List<Movie> getUserWatchList(String username) {
+        User user = userRepo.findByUsername(username);
+        return user.getWatchList();
+    }
 
+    public WatchListResponse addUserWatchList(String username, String imdbId) {
         Movie movie = movieRepo.findMovieByImdbId(imdbId).orElse(null);
         System.out.println(movie);
         if (movie != null) {
@@ -83,7 +88,8 @@ public class UserService {
         else {
             return new WatchListResponse("Movie not found", false);
         }
-
     }
+
+
 }
 

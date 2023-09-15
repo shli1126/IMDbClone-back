@@ -1,6 +1,7 @@
 package com.example.moviesDB.auth.Controller;
 
 
+import com.example.moviesDB.app.Model.Movie;
 import com.example.moviesDB.app.Model.Review;
 import com.example.moviesDB.auth.DTO.LoginDTO;
 import com.example.moviesDB.auth.DTO.UserDTO;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -32,6 +34,14 @@ public class UserController {
         LoginResponse loginResponse = userService.loginUser(loginDTO);
         return ResponseEntity.ok(loginResponse);
     }
+
+    @GetMapping(path="/watchlist/{username}")
+    public List<Movie> getUserWatchList(@PathVariable String username) {
+        List<Movie> movies = userService.getUserWatchList(username);
+        System.out.println(movies);
+        return movies;
+    }
+
 
     @PostMapping(path="/watchlist")
     public ResponseEntity<?> addUserWatchList(@RequestBody Map<String, String> payload) {
