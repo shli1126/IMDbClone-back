@@ -91,5 +91,10 @@ public class UserService {
     }
 
 
+    public String getUsernameWithEmail(String email) {
+        String username = userRepo.findByEmail(email).getUsername();
+
+        return username;
+    }
 }
 
